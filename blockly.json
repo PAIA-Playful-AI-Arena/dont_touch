@@ -19,7 +19,7 @@
         ["scene_info['x']", "x position of the car", "車子的 x 座標"],
         ["scene_info['y']", "y position of the car", "車子的 y 座標"],
         ["scene_info['angle']", "angle of the car", "車子的角度"],
-        ["scene_info['crash_times']","crash times of the car", "車子碰撞次數"],
+        ["scene_info['crash_count']","crash times of the car", "車子碰撞次數"],
         ["scene_info['end_x']", "x position of the target", "終點的 x 座標"],
         ["scene_info['end_y']", "y position of the target", "終點的 y 座標"],
         ["scene_info['R_sensor']", "right sensor value", "右超聲波值"],
@@ -28,7 +28,7 @@
         ["scene_info['B_sensor']", "rear sensor value", "後超聲波值"],
         ["scene_info['R_T_sensor']", "right front sensor value", "右前超聲波值"],
         ["scene_info['L_T_sensor']", "left front sensor value", "左前超聲波值"],
-        ["scene_info['check_points]", "coordinate of check points", "檢查點座標"]
+        ["scene_info['check_points']", "coordinate of check points", "檢查點座標"]
     ],
     "CONSTANT": [
         [0, "left boundary", "左邊界"],
