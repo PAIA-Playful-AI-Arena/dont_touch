@@ -12,14 +12,14 @@ class Car(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.car_no = car_no  # From 0 to 3
         self.image_num = 9
-        self.image_name = f"car_0{self.car_no+1}"
+        self.image_name = f"car_0{self.car_no + 1}"
         self.collide_frame = -100
         self.collide_times = 0
-        self.size = (40, 40)  # car size
+        self.size = (PPM * 2, PPM * 2)  # car size
         self.is_completed = False
         self.end_frame = 0
         self.origin_image = pygame.transform.scale(
-            pygame.image.load(path.join(ASSET_IMAGE_DIR, f"car_0{self.car_no+1}.png")),
+            pygame.image.load(path.join(ASSET_IMAGE_DIR, f"car_0{self.car_no + 1}.png")),
             self.size)
         self.image = self.origin_image  # after rotate
         self.rect = self.image.get_rect()
@@ -49,7 +49,7 @@ class Car(pygame.sprite.Sprite):
             if self.image_num == 60:
                 self.image_num = 9
                 self.explosion = False
-                self.image_name = f"car_0{self.car_no+1}"
+                self.image_name = f"car_0{self.car_no + 1}"
         self.image = pygame.transform.rotate(self.origin_image, (self.body.angle * 180 / math.pi) % 360)
         self.rect = self.image.get_rect()
         if self.is_running and commands != None:
@@ -77,7 +77,6 @@ class Car(pygame.sprite.Sprite):
             self.explosion = True
             return True
         return False
-
 
     def detect_distance(self, frame, walls):
         sensor_value = self.sensor.update(frame, walls)
@@ -116,12 +115,12 @@ class Car(pygame.sprite.Sprite):
                          "r_t_sensor_value": self.sensor_R_T,
                          "l_t_sensor_value": self.sensor_L_T,
                          "f_sensor_value": self.sensor_F,
-                         "b_sensor_value":self.sensor_B,
+                         "b_sensor_value": self.sensor_B,
                          "L_PWM": self.L_PWM,
                          "R_PWM": self.R_PWM,
                          "end_frame": self.end_frame,
-                         "image":self.image_name,
-                         "crash_times":self.collide_times,
-                         "check_point":self.check_point,
+                         "image": self.image_name,
+                         "crash_times": self.collide_times,
+                         "check_point": self.check_point,
                          }
         return self.car_info

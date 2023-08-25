@@ -141,11 +141,11 @@ class Dont_touch(PaiaGame):
         }
         # game_progress["game_sys_info"] = {"view_center_coordinate": [200, -1200]}
         game_progress["game_sys_info"] = {"view_center_coordinate": [0, 0]}
-        game_progress["background"].append(create_image_view_data("bg_img", 0, 0, 800, 800))
+        game_progress["object_list"].append(create_image_view_data("bg_img", 0, 0, 800, 800))
         for p in self.game_mode.all_points:
             game_progress["object_list"].append(p.get_progress_data())
 
-        game_progress["background"].append(create_image_view_data("bar_img", 800, 0, 200, 800))
+        game_progress["toggle"].append(create_image_view_data("bar_img", 800, 0, 200, 800))
         # wall
         for wall in self.game_mode.walls:
             vertices = [(wall.body.transform * v) for v in wall.box.shape.vertices]
