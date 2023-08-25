@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "/Users/yanshaoting/Downloads/level_1.tmj",
+    "activeFile": "",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -18,6 +18,26 @@
                 "x": 1325,
                 "y": 1240.625
             }
+        },
+        "/Users/yanshaoting/Downloads/不要碰碰車比賽地圖檔案/v3_tile.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "/Users/yanshaoting/Downloads/不要碰碰車比賽地圖檔案/國小組_3.tmj": {
+            "scale": 0.16,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1750,
+                "y": 984.375
+            }
+        },
+        "/Users/yanshaoting/Downloads/爆爆王.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/yanshaoting/PycharmProjects/MLGame/games/bomb_man/tiled.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "/Users/yanshaoting/PycharmProjects/MLGame/games/maze_car/src/map/level_10.json": {
             "scale": 0.2462,
@@ -145,8 +165,56 @@
             "scale": 0.24,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1283.3333333333335,
-                "y": 1277.0833333333335
+                "x": 1285.416666666667,
+                "y": 1275
+            }
+        },
+        "level_13.tmj": {
+            "scale": 0.1687,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 245.99881446354493,
+                "y": 1037.3443983402492
+            }
+        },
+        "level_14.tmj": {
+            "scale": 0.18517578124999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1136.757725978273,
+                "y": 1393.2707520303768
+            }
+        },
+        "level_15.tmj": {
+            "scale": 0.18517578124999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1287.965404493197,
+                "y": 1269.0644446788315
+            }
+        },
+        "level_16.tmj": {
+            "scale": 0.1778,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1650.731158605174,
+                "y": 1332.9583802024745
+            }
+        },
+        "level_17.tmj": {
+            "scale": 0.18517578124999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1287.965404493197,
+                "y": 1285.2652673768591
+            }
+        },
+        "level_18.tmj": {
+            "scale": 0.18,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1286.1111111111109,
+                "y": 1238.8888888888887
             }
         },
         "level_2.tmj": {
@@ -210,7 +278,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 1281.7979013467734,
-                "y": 1283.913079401801
+                "y": 1279.6827232917458
             }
         },
         "tile.tsx": {
@@ -222,36 +290,86 @@
             "scaleInEditor": 1
         },
         "v3_tile.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
-            "scaleInEditor": 1.2207
+            "scaleInEditor": 1
+        },
+        "國小組_1.tmj": {
+            "scale": 0.18517578124999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1317.6669127729144,
+                "y": 1325.7673241219284
+            }
+        },
+        "國小組_2.tmj": {
+            "scale": 0.18517578124999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1323.0671870055908,
+                "y": 1325.7673241219284
+            }
+        },
+        "國小組_3.tmj": {
+            "scale": 0.18517578124999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1328.4674612382662,
+                "y": 1325.7673241219284
+            }
+        },
+        "國高中組_1.tmj": {
+            "scale": 0.18517578124999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1323.0671870055908,
+                "y": 1325.7673241219284
+            }
+        },
+        "國高中組_2.tmj": {
+            "scale": 0.18517578124999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1323.0671870055908,
+                "y": 1325.7673241219284
+            }
+        },
+        "國高中組_3.tmj": {
+            "scale": 0.18517578124999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1277.1648560278456,
+                "y": 1285.2652673768591
+            }
         }
     },
-    "last.externalTilesetPath": "/Users/yanshaoting/PycharmProjects/MLGame/games/maze_car/src/map",
-    "last.imagePath": "/Users/yanshaoting/PycharmProjects/MLGame/games/dont_touch/src/map",
-    "map.height": 40,
+    "last.externalTilesetPath": "/Users/yanshaoting/PycharmProjects/MLGame/games/dont_touch/src/map",
+    "last.imagePath": "/Users/yanshaoting/Downloads",
+    "map.height": 15,
     "map.lastUsedFormat": "json",
     "map.tileHeight": 64,
     "map.tileWidth": 64,
-    "map.width": 40,
+    "map.width": 15,
     "openFiles": [
         "v3_tile.tsx",
-        "level_12.tmj",
-        "/Users/yanshaoting/Downloads/level_1.tmj"
+        "level_9.tmj",
+        "level_13.tmj",
+        "/Users/yanshaoting/Downloads/爆爆王.tsx"
     ],
     "project": "level1.tiled-project",
     "recentFiles": [
         "v3_tile.tsx",
-        "level_12.tmj",
-        "level_1.tmj",
-        "/Users/yanshaoting/PycharmProjects/MLGame/games/maze_car/src/map/level_10.json",
-        "/Users/yanshaoting/PycharmProjects/MLGame/games/maze_car/src/map/level_9.json",
-        "/Users/yanshaoting/PycharmProjects/MLGame/games/maze_car/src/map/level_11.json",
-        "level_8.tmj",
-        "/Users/yanshaoting/PycharmProjects/MLGame/games/maze_car/src/map/level_8.json",
-        "level_11.tmj",
-        "level_10.tmj",
         "level_9.tmj",
-        "level_7.tmj"
+        "level_13.tmj",
+        "/Users/yanshaoting/Downloads/爆爆王.tsx",
+        "/Users/yanshaoting/Downloads/不要碰碰車比賽地圖檔案/國小組_3.tmj",
+        "/Users/yanshaoting/PycharmProjects/MLGame/games/bomb_man/tiled.tsx",
+        "國小組_1.tmj",
+        "國小組_2.tmj",
+        "國小組_3.tmj",
+        "國高中組_1.tmj",
+        "國高中組_2.tmj",
+        "國高中組_3.tmj"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
