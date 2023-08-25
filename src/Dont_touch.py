@@ -141,11 +141,11 @@ class Dont_touch(PaiaGame):
         }
         # game_progress["game_sys_info"] = {"view_center_coordinate": [200, -1200]}
         game_progress["game_sys_info"] = {"view_center_coordinate": [0, 0]}
-        game_progress["object_list"].append(create_image_view_data("bg_img", 0, 0, 800, 800))
+        game_progress["object_list"].append(create_image_view_data("bg_img", 0, 0, 640, 640))
         for p in self.game_mode.all_points:
             game_progress["object_list"].append(p.get_progress_data())
 
-        game_progress["toggle"].append(create_image_view_data("bar_img", 800, 0, 200, 800))
+        game_progress["toggle"].append(create_image_view_data("bar_img", 640, 0, 160, 640))
         # wall
         for wall in self.game_mode.walls:
             vertices = [(wall.body.transform * v) for v in wall.box.shape.vertices]
@@ -158,19 +158,19 @@ class Dont_touch(PaiaGame):
 
         # text
         game_progress["toggle"].append(
-            create_text_view_data("{0:05d} frames".format(self.frame_count), 822, 38, WHITE, font_style="26px Arial"))
+            create_text_view_data("{0:05d} frames".format(self.frame_count), 658, 30, WHITE, font_style="21px Arial"))
         for car in self.game_mode.car_info:
             game_progress["toggle"].append(
-                create_text_view_data(f"{car['crash_times']}", WIDTH - 135, 130 + 175 * car["id"], WHITE,
-                                      font_style="25px Arial"))
+                create_text_view_data(f"{car['crash_times']}", WIDTH - 108, 104 + 140 * car["id"], WHITE,
+                                      font_style="20px Arial"))
 
             game_progress["toggle"].append(
-                create_text_view_data(f"{car['check_point']}", WIDTH - 135, 177 + 175 * car["id"], WHITE,
-                                      font_style="25px Arial"))
+                create_text_view_data(f"{car['check_point']}", WIDTH - 108, 142 + 140 * car["id"], WHITE,
+                                      font_style="20px Arial"))
 
             game_progress["toggle"].append(
-                create_text_view_data("{0:04d} frames".format(car["end_frame"]), WIDTH - 142, 224 + 175 * car["id"], WHITE,
-                                      font_style="25px Arial"))
+                create_text_view_data("{0:04d} frames".format(car["end_frame"]), WIDTH - 114, 179 + 140 * car["id"], WHITE,
+                                      font_style="20px Arial"))
 
             if car["is_running"]:
                 # line
