@@ -53,6 +53,9 @@ MAP_DIR = path.join(path.dirname(__file__),  "map")
 BG_IMG = "bg.png"
 BG_URL = "https://raw.githubusercontent.com/yen900611/dont_touch/master/asset/image/bg.png"
 
+L_BG_IMG = "bg_light.png"
+L_BG_URL = "https://raw.githubusercontent.com/yen900611/dont_touch/master/asset/image/bg_light.png"
+
 LOGO = "logo.png"
 LOGO_URL = "https://raw.githubusercontent.com/yen900611/dont_touch/master/asset/image/logo.png"
 

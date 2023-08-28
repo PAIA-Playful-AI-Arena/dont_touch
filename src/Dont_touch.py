@@ -13,10 +13,16 @@ from .sound_controller import *
 
 
 class Dont_touch(PaiaGame):
-    def __init__(self, user_num, map, time_to_play, sensor_num, sound, *args, **kwargs):
+    def __init__(self, user_num, map, time_to_play, sensor_num, sound, dark_mode = 'dark', *args, **kwargs):
         super().__init__(user_num=user_num)
         # self.game_type = game_type
         self.user_num = user_num
+        if dark_mode == 'dark':
+            self.dark_mode = True
+        elif dark_mode == 'light':
+            self.dark_mode = False
+        else:
+            self.dark_mode = True
         self.is_single = False
         if self.user_num == 1:
             self.is_single = True
@@ -107,9 +113,14 @@ class Dont_touch(PaiaGame):
         logo_path = path.join(ASSET_IMAGE_DIR, LOGO)
         logo_url = LOGO_URL
         game_info["assets"].append(create_asset_init_data("logo", 40, 40, logo_path, logo_url))
-        bg_path = path.join(ASSET_IMAGE_DIR, BG_IMG)
-        bg_url = BG_URL
-        game_info["assets"].append(create_asset_init_data("bg_img", 600, 600, bg_path, bg_url))
+        if self.dark_mode:
+            bg_path = path.join(ASSET_IMAGE_DIR, BG_IMG)
+            bg_url = BG_URL
+            game_info["assets"].append(create_asset_init_data("bg_img", 600, 600, bg_path, bg_url))
+        else:
+            bg_path = path.join(ASSET_IMAGE_DIR, L_BG_IMG)
+            bg_url = L_BG_URL
+            game_info["assets"].append(create_asset_init_data("bg_img", 600, 600, bg_path, bg_url))
         bar_path = path.join(ASSET_IMAGE_DIR, BAR_IMG)
         bar_url = BAR_URL
         game_info["assets"].append(create_asset_init_data("bar_img", 600, 600, bar_path, bar_url))

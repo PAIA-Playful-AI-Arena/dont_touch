@@ -1,6 +1,6 @@
 {
   "game_name": "dont_touch",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "url": "https://github.com/yen900611/dont_touch",
   "description": "不要碰！",
   "logo": [
@@ -51,6 +51,17 @@
       ],
       "help": "'on' can turn on the sound.",
       "default": "on"
+    },
+    {
+      "name": "dark_mode",
+      "verbose": "深色模式",
+      "type": "str",
+      "choices": [
+        "dark",
+        "light"
+      ],
+      "help": "'dark' can turn on the dark mode.",
+      "default": "dark"
     }
   ]
 }
