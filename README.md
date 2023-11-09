@@ -61,6 +61,7 @@ python -m mlgame -f 60 -i games/dont_touch/ml/ml_play.py -i games/dont_touch/ml/
 * `time_to_play`：限制遊戲總時間，單位為 frame，時間到了之後即使有玩家還沒走出迷宮，遊戲仍然會結束。
 * `sensor`：選擇感測器數量，目前可以選擇4或6個，預設為6。
 * `sound`：音效設定，可選擇"on"或"off"，預設為"off"
+* `dark_mode`: 選擇是否開啟深色模式，可選擇"light"或"dark"，預設為"dark"
 
 
 ## ＡＩ範例
