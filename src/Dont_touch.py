@@ -2,7 +2,7 @@ import math
 
 from mlgame.game.paia_game import PaiaGame
 from mlgame.utils.enum import get_ai_name
-from mlgame.view.decorator import check_game_progress, check_game_result
+from mlgame.view.decorator import check_game_progress, check_game_result, check_scene_init_data
 from mlgame.view.view_model import create_text_view_data, create_asset_init_data, create_image_view_data, \
     create_line_view_data, Scene, create_polygon_view_data, create_rect_view_data
 
@@ -102,12 +102,15 @@ class Dont_touch(PaiaGame):
             scene_info[str(car["id"]) + "P_position"] = car["topleft"]
         return scene_info
 
+    @check_scene_init_data
     def get_scene_init_data(self) -> dict:
         """
         Get the scene and object information for drawing on the web
         """
         game_info = {"scene": self.scene.__dict__,
-                     "assets": []}
+                     "assets": [],
+                     "background":[]
+                     }
         game_info["map_width"] = self.game_mode.map.tileWidth * 20
         game_info["map_height"] = self.game_mode.map.tileHeight * 20
         logo_path = path.join(ASSET_IMAGE_DIR, LOGO)
@@ -133,6 +136,17 @@ class Dont_touch(PaiaGame):
                                                               path.join(ASSET_IMAGE_DIR, f"regularExplosion0{i}.png"),
                                                               f"https://raw.githubusercontent.com/yen900611/dont_touch/master/asset/image/regularExplosion0{i}.png"))
 
+        game_info["background"].append(create_image_view_data("bg_img", 0, 0, 640, 640))
+
+        for wall in self.game_mode.walls:
+            vertices = [(wall.body.transform * v) for v in wall.box.shape.vertices]
+            vertices = [self.game_mode.transfer_box2d_to_pygame(v) for v in vertices]
+            game_info["background"].append(create_polygon_view_data("wall", vertices, PAIA_B))
+        for wall in self.game_mode.slant_walls:
+            vertices = [(wall.body.transform * v) for v in wall.box.shape.vertices]
+            vertices = [self.game_mode.transfer_box2d_to_pygame(v) for v in vertices]
+            game_info["background"].append(create_polygon_view_data("wall", vertices, PAIA_B))
+
         return game_info
 
     @check_game_progress
@@ -152,20 +166,11 @@ class Dont_touch(PaiaGame):
         }
         # game_progress["game_sys_info"] = {"view_center_coordinate": [200, -1200]}
         game_progress["game_sys_info"] = {"view_center_coordinate": [0, 0]}
-        game_progress["object_list"].append(create_image_view_data("bg_img", 0, 0, 640, 640))
         for p in self.game_mode.all_points:
             game_progress["object_list"].append(p.get_progress_data())
 
         game_progress["toggle"].append(create_image_view_data("bar_img", 640, 0, 160, 640))
         # wall
-        for wall in self.game_mode.walls:
-            vertices = [(wall.body.transform * v) for v in wall.box.shape.vertices]
-            vertices = [self.game_mode.transfer_box2d_to_pygame(v) for v in vertices]
-            game_progress["object_list"].append(create_polygon_view_data("wall", vertices, PAIA_B))
-        for wall in self.game_mode.slant_walls:
-            vertices = [(wall.body.transform * v) for v in wall.box.shape.vertices]
-            vertices = [self.game_mode.transfer_box2d_to_pygame(v) for v in vertices]
-            game_progress["object_list"].append(create_polygon_view_data("wall", vertices, PAIA_B))
 
         # text
         game_progress["toggle"].append(
