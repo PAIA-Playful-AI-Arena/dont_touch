@@ -5,7 +5,7 @@
   "description": "不要碰！",
   "logo": [
     "./asset/image/dont_touch.svg",
-    "https://github.com/yen900611/dont_touch/blob/master/asset/image/dont_touch.svg"
+    "https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/dont_touch/main/asset/image/dont_touch.svg"
   ],
   "user_num": {
     "min": 1,"max": 4
