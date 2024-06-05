@@ -87,7 +87,7 @@ def get_progress_data(game_mode):
     #     pass
     for user in game_mode.car_info:
         game_progress["user_info"].append({
-            "player": str(user["id"] + 1) + "P",
+            "player_num": str(user["id"] + 1) + "P",
             "F_sensor": user["f_sensor_value"]["distance"],
             "R_sensor": user["r_sensor_value"]["distance"],
             "L_sensor": user["l_sensor_value"]["distance"],
@@ -270,11 +270,11 @@ def get_dummy_result_data():
         "frame_used": 15,
         "ranks": [
             [  # 1st
-                {"player": "1P",  # 給系統mapping
+                {"player_num": "1P",  # 給系統mapping
                  "game_result": "7s",  # 顯示給玩家的
                  # 可自行增加
                  },
-                {"player": "1P",  # 給系統mapping
+                {"player_num": "1P",  # 給系統mapping
                  "game_result": "7s",  # 顯示給玩家的
                  # 可自行增加
                  }
