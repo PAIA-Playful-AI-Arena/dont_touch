@@ -316,7 +316,6 @@ class Dont_touch(PaiaGame):
         scene_info = self.get_scene_info
         result = self.game_mode.result
         rank = []
-        # TODO refactor
         for user in self.game_mode.ranked_user:
             if self.game_mode.check_point_num:
                 pass_percent = round(user.check_point / self.game_mode.check_point_num, 5) * 100
@@ -324,7 +323,7 @@ class Dont_touch(PaiaGame):
             else:
                 pass_percent = 0
                 remain_point = 0
-            same_rank = {"player": str(user.car_no + 1) + "P",
+            same_rank = {"player_num": str(user.car_no + 1) + "P",
                          "rank": self.game_mode.ranked_user.index(user) + 1,
                          # "frame_limit": self.game_end_time,
                          "used_frame": user.end_frame,
@@ -337,7 +336,10 @@ class Dont_touch(PaiaGame):
                          "score": 10000 * user.check_point - 0.001 * user.end_frame - 10 * user.collide_times
                          }
             rank.append(same_rank)
-
+        print({"frame_used": scene_info["frame"],
+                "status": self.game_mode.state,
+                "attachment": rank,
+                })
         return {"frame_used": scene_info["frame"],
                 "status": self.game_mode.state,
                 "attachment": rank,
