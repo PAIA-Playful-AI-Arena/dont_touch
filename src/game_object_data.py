@@ -87,7 +87,7 @@ def get_progress_data(game_mode):
     #     pass
     for user in game_mode.car_info:
         game_progress["user_info"].append({
-            "player": str(user["id"] + 1) + "P",
+            "player_num": str(user["id"] + 1) + "P",
             "F_sensor": user["f_sensor_value"]["distance"],
             "R_sensor": user["r_sensor_value"]["distance"],
             "L_sensor": user["l_sensor_value"]["distance"],
@@ -112,49 +112,49 @@ def get_scene_init_sample_data() -> dict:
             "image_id": 'car_01',
             "width": 50,
             "height": 50,
-            "url": 'https://raw.githubusercontent.com/yen900611/Maze_Car/master/game_core/image/car_01.png'
+            "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/car_01.png'
         }, {
             "type": "image",
             "image_id": 'car_02',
             "width": 50,
             "height": 50,
-            "url": 'https://raw.githubusercontent.com/yen900611/Maze_Car/master/game_core/image/car_02.png'
+            "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/car_02.png'
         }, {
             "type": "image",
             "image_id": 'car_03',
             "width": 50,
             "height": 50,
-            "url": 'https://raw.githubusercontent.com/yen900611/Maze_Car/master/game_core/image/car_03.png'
+            "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/car_03.png'
         }, {
             "type": "image",
             "image_id": 'car_04',
             "width": 50,
             "height": 50,
-            "url": 'https://raw.githubusercontent.com/yen900611/Maze_Car/master/game_core/image/car_04.png'
+            "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/car_04.png'
         }, {
             "type": "image",
             "image_id": 'car_05',
             "width": 50,
             "height": 50,
-            "url": 'https://raw.githubusercontent.com/yen900611/Maze_Car/master/game_core/image/car_05.png'
+            "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/car_05.png'
         }, {
             "type": "image",
             "image_id": 'car_06',
             "width": 50,
             "height": 50,
-            "url": 'https://raw.githubusercontent.com/yen900611/Maze_Car/master/game_core/image/car_06.png'
+            "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/car_06.png'
         }, {
             "type": "image",
             "image_id": 'info',
             "width": 306,
             "height": 480,
-            "url": 'https://raw.githubusercontent.com/yen900611/Maze_Car/master/game_core/image/info.png'
+            "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/info.png'
         }, {
             "type": "image",
             "image_id": 'logo',
             "width": 40,
             "height": 40,
-            "url": 'https://raw.githubusercontent.com/yen900611/Maze_Car/master/game_core/image/logo.png'
+            "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/logo.png'
         }
     ]
     return {"scene": scene.__dict__,
@@ -270,11 +270,11 @@ def get_dummy_result_data():
         "frame_used": 15,
         "ranks": [
             [  # 1st
-                {"player": "1P",  # 給系統mapping
+                {"player_num": "1P",  # 給系統mapping
                  "game_result": "7s",  # 顯示給玩家的
                  # 可自行增加
                  },
-                {"player": "1P",  # 給系統mapping
+                {"player_num": "1P",  # 給系統mapping
                  "game_result": "7s",  # 顯示給玩家的
                  # 可自行增加
                  }
