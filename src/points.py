@@ -48,7 +48,7 @@ class End_point(Point):
                       "y": self.rect.y,
                       "width": self.rect.width,
                       "height": self.rect.height,
-                      "image_id": "logo",
+                      "image_id": "target",
                       "angle": 0}
         return asset_data
 

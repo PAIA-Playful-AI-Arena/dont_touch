@@ -113,9 +113,8 @@ class Dont_touch(PaiaGame):
                      }
         game_info["map_width"] = self.game_mode.map.tileWidth * 20
         game_info["map_height"] = self.game_mode.map.tileHeight * 20
-        logo_path = path.join(ASSET_IMAGE_DIR, LOGO)
-        logo_url = LOGO_URL
-        game_info["assets"].append(create_asset_init_data("logo", 40, 40, logo_path, logo_url))
+
+        game_info["assets"].append(create_asset_init_data("target", 40, 40, TARGET_PATH, TARGET_URL))
         if self.dark_mode:
             bg_path = path.join(ASSET_IMAGE_DIR, BG_IMG)
             bg_url = BG_URL
@@ -130,11 +129,11 @@ class Dont_touch(PaiaGame):
         for i in range(self.user_num):
             game_info["assets"].append(
                 create_asset_init_data(f"car_0{i + 1}", 40, 40, path.join(ASSET_IMAGE_DIR, f"car_0{i + 1}.png"),
-                                       f"https://raw.githubusercontent.com/yen900611/dont_touch/master/asset/image/car_0{i + 1}.png"))
+                                       f"https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/dont_touch/master/asset/image/car_0{i + 1}.png"))
         for i in range(0, 6):
             game_info["assets"].append(create_asset_init_data(f"regularExplosion0{i}", 40, 40,
                                                               path.join(ASSET_IMAGE_DIR, f"regularExplosion0{i}.png"),
-                                                              f"https://raw.githubusercontent.com/yen900611/dont_touch/master/asset/image/regularExplosion0{i}.png"))
+                                                              f"https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/dont_touch/master/asset/image/regularExplosion0{i}.png"))
 
         game_info["background"].append(create_image_view_data("bg_img", 0, 0, 640, 640))
 

@@ -151,10 +151,10 @@ def get_scene_init_sample_data() -> dict:
             "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/info.png'
         }, {
             "type": "image",
-            "image_id": 'logo',
+            "image_id": 'target',
             "width": 40,
             "height": 40,
-            "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/logo.png'
+            "url": 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/Maze_Car/main/game_core/image/target.png'
         }
     ]
     return {"scene": scene.__dict__,
