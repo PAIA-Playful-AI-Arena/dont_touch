@@ -48,16 +48,18 @@ ASSET_IMAGE_DIR = path.join(path.dirname(__file__), "../asset/image")
 IMAGE_DIR = path.join(path.dirname(__file__), 'image')
 SOUND_DIR = path.join(path.dirname(__file__), '../asset/sound')
 MAP_DIR = path.join(path.dirname(__file__),  "map")
-
+IMAGE_URL = "https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/dont_touch/main/asset/image/"
 '''image'''
 BG_IMG = "bg.png"
-BG_URL = "https://raw.githubusercontent.com/yen900611/dont_touch/master/asset/image/bg.png"
+BG_URL = f"{IMAGE_URL}bg.png"
 
 L_BG_IMG = "bg_light.png"
-L_BG_URL = "https://raw.githubusercontent.com/yen900611/dont_touch/master/asset/image/bg_light.png"
+L_BG_URL = f"{IMAGE_URL}bg_light.png"
 
 LOGO = "logo.png"
-LOGO_URL = "https://raw.githubusercontent.com/yen900611/dont_touch/master/asset/image/logo.png"
-
+LOGO_URL = f"{IMAGE_URL}logo.png"
+TARGET = "target.png"
+TARGET_PATH = path.join(ASSET_IMAGE_DIR, TARGET)
+TARGET_URL = f"{IMAGE_URL}target.png"
 BAR_IMG = "bar.png"
-BAR_URL = "https://raw.githubusercontent.com/yen900611/dont_touch/master/asset/image/bar.png"
+BAR_URL = f"{IMAGE_URL}bar.png"
