@@ -41,7 +41,10 @@ class End_point(Point):
                 self.game.state = GameResultState.FINISH
                 hit.is_running = False
                 hit.status = GameStatus.GAME_PASS
-
+    def get_info(self):
+        return {
+            "coordinate": self.rect.center
+        }
     def get_progress_data(self):
         asset_data = {"type": "image",
                       "x": self.rect.x,
@@ -66,6 +69,7 @@ class Check_point(Point):
         self.detect_cars_collision()
 
     def detect_cars_collision(self):
+        # TODO 車子和檢查點的碰撞有點不精確
         hits = pygame.sprite.spritecollide(self, self.game.cars, False)
         for hit in hits:
             self.color = GREEN
@@ -85,7 +89,10 @@ class Check_point(Point):
         #               "color": YELLOW}
         asset_data = create_polygon_view_data("check_point", [list(v) for v in self.vertices], self.color)
         return asset_data
-
+    def get_info(self):
+        return {
+            "coordinate": self.rect.center
+        }
 
 class Outside_point(Point):
     '''

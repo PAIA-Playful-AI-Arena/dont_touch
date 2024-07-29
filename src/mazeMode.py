@@ -14,12 +14,12 @@ from .tiledMap_to_box2d import TiledMap_box2d
 
 
 class MazeMode(GameMode):
-    def __init__(self, user_num: int, maze_no, time, sensor, sound_controller):
+    def __init__(self, user_num: int, map_file, time, sensor, sound_controller):
         super(MazeMode, self).__init__()
         '''load map data'''
         self.user_num = user_num
-        self.maze_id = maze_no - 1
-        self.map_file = f"level_{maze_no}.tmj"
+        # self.maze_id = maze_no - 1
+        self.map_file = map_file
         self.load_data()
 
         '''group of sprites'''
@@ -53,7 +53,7 @@ class MazeMode(GameMode):
     def new(self):
         # initialize all variables and do all setup for a new game
         self.pygame_point = [10, 100]
-        map = TiledMap_box2d(path.join(MAP_DIR, self.map_file), 32)
+        map = TiledMap_box2d(self.map_file, 32)
         walls = map.get_wall_info()
         check_walls = map.get_check_wall_info()
         for wall in walls:
@@ -137,13 +137,12 @@ class MazeMode(GameMode):
             pass
 
     def load_data(self):
-        map_folder = path.join(path.dirname(__file__), "map")
         try:
-            self.map = Map(path.join(map_folder, self.map_file))
+            self.map = Map(self.map_file)
         except Exception:
             print(f"File '{self.map_file}' is not found.We will load first map for you.")
-            self.map_file = "level_2.tmj"
-            self.map = Map(path.join(map_folder, self.map_file))
+            self.map_file = path.join(MAP_DIR, "level_1.tmj")
+            self.map = Map(self.map_file)
 
     def _init_world(self, user_no: int):
         self.contact_man = Box2D.b2ContactManager()

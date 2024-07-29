@@ -1,49 +1,69 @@
-# Don't Touch README
+# 不要碰碰車
 
 ![Dont_touch](https://img.shields.io/github/v/tag/PAIA-Playful-AI-Arena/Dont_touch)
-[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
-[![MLGame](https://img.shields.io/badge/MLGame->9.5.3.*-<COLOR>.svg)](https://github.com/PAIA-Playful-AI-Arena/MLGame)
-[![pygame](https://img.shields.io/badge/pygame-2.0.1-<COLOR>.svg)](https://github.com/pygame/pygame/releases/tag/2.0.1)
+[![Python 3.9](https://img.shields.io/badge/python->3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
+[![MLGame](https://img.shields.io/badge/MLGame->10.4.6a2-<COLOR>.svg)](https://github.com/PAIA-Playful-AI-Arena/MLGame)
 
-不要碰！
-Don't Touch 是一款基於 MLGame 框架的遊戲，由玩家控制幽浮的速度，達到讓幽浮前進、後退、轉彎的效果，並且幽浮上配備有距離感測器，可以讓玩家了解幽浮與周遭障礙物的距離。玩家需要盡可能減少碰到牆壁的次數，並且走到迷宮的終點。
+
+在茫茫的宇宙中，有許多的障礙物，要如何閃過障礙物，走到白洞前往新世界呢？本遊戲提供多元的關卡，隨著遊戲難度提升，考驗各位玩家如何在多變的環境下，依然能夠走到終點。小心，碰到牆壁可是會爆炸的！！
+
 ![](https://i.imgur.com/G5Moi7g.gif)
 
+`遊戲目標`&nbsp;&nbsp;&nbsp; 在遊戲時間截止前到達迷宮的終點，並且盡可能減少碰撞牆壁的次數。
 
----
-## 目標
+`排名方式`&nbsp;&nbsp;&nbsp; 分數高者獲勝
+    - 分數＝ `檢查點數量`x10000 - `碰撞次數`x10 - `使用時間`x0.001
 
-在遊戲時間截止前到達迷宮的終點，並且盡可能減少碰撞牆壁的次數。
+# 更新內容(2.0.1)
+1. 調整資料格式，符合 `MLGame 10.4.6a2` 以後版本
 
-### 排名條件
 
-1. 幽浮所走的距離。經過的檢查點愈多則排名愈前。
-2. 幽浮與牆壁碰撞次數。若兩台走經的檢查點數量相同，則碰撞次數少者排名愈前。
-3. 幽浮前進速度。若前兩項評分依據皆平手，則比較走到最末檢查點時的遊戲時間，愈早走到者排名愈前。
+# AI 的行動
+需同時給予左右兩個輪子移動的力量，力量介於 `-255` 到 `255` 之間，透過控制左右輪轉速，即可達成前進、左轉、右轉、後退等動作。
 
-## 遊戲系統
+<br />
 
-1. 行動機制
+![top](/assets/icons/top.svg)&nbsp;&nbsp;&nbsp;![w-key](/assets/icons/w.svg)&nbsp;&nbsp;&nbsp;左右輪輸出 -255 ~ 255，由玩家程式控制。
 
-    控制左右輪轉速，達到前進、後退、轉彎的目的。
-    左輪與右輪的轉速由玩家程式控制，範圍為 -255 ~ 255。 
-   速度為 0 時相當於停在原地，速度為負值實則輪子向後轉，速度為正時輪子向前轉。
+![bottom](/assets/icons/bottom.svg)&nbsp;&nbsp;&nbsp;![s-key](/assets/icons/s.svg)&nbsp;&nbsp;&nbsp;??
 
-2. 感測器
-    感測器測量的起點為自走車車身外圍，終點為直線距離上最靠的牆壁，實際距離如圖所示
-    ![](https://i.imgur.com/AghqU7h.png)
+![left-key](/assets/icons/left.svg)&nbsp;&nbsp;&nbsp;![A-key](/assets/icons/a.svg)&nbsp;&nbsp;&nbsp;??
 
-4. 物件大小
+![right-key](/assets/icons/right.svg)&nbsp;&nbsp;&nbsp;![D-key](/assets/icons/d.svg)&nbsp;&nbsp;&nbsp;??
 
-    使用Box2D的座標系統，單位為cm，每公分換算為4像素
+# 座標系統
 
-    - 自走車 10  x 10cm
-    - 終點 15 x 15cm
-4. 座標系統
-    所有座標接回傳物件左上角之座標。
-    原點在迷宮區域的左下角，Ｘ軸向右為正，Y軸向上為正。
-    圖中三個白點分別表示 (0, 0), (5, 0), (0, 5)。
+- 使用 `Box2D` 的座標系統，長度單位為 `cm` 。
+- `左下角`為原點 (0,0)，`Ｘ軸`向`右`為正，`Y軸`向`上`為正。
+- 使用 Tiled 來繪製地圖，地圖一格為 `5cm`。
+- 所有座標皆回傳物件`中心點`之座標。 
+- 圖中三個白點分別表示 (0, 0), (5, 0), (0, 5)。
 ![](https://i.imgur.com/zq7aAzK.png)
+
+
+<br />
+
+## 幽浮
+
+- 大小 10cm x 10cm
+- 控制左右輪轉速，達到前進、後退、轉彎的目的。 左輪與右輪的轉速由玩家程式控制，範圍為 -255 ~ 255。 速度為 0 時相當於停在原地，速度為負值實則輪子向後轉，速度為正時輪子向前轉。
+
+
+## 感測器
+
+- 可透過感測器測量距離`車身`到`牆壁`的距離。
+- 一台車有 6 個感測器。
+
+## 檢查點
+- 為一個線段，通過此線段，檢查點數量加1
+  
+## 終點
+- 大小 15cm x 15cm 
+- 為一個白色蟲洞，象徵逃出迷宮，可以前往新世界。
+
+<br />
+
+
 
 ---
 

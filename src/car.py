@@ -34,6 +34,7 @@ class Car(pygame.sprite.Sprite):
         self.L_PWM = 0
         self.R_PWM = 0
         self.rect.center = (0, 0)  # pygame
+        # tiled -> body
         self.x, self.y = coordinate
         self.body = world.CreateDynamicBody(position=coordinate)
         self.box = self.body.CreatePolygonFixture(box=(1, 1), density=1, friction=0.1, restitution=0.3)
@@ -107,8 +108,8 @@ class Car(pygame.sprite.Sprite):
                          "topleft": self.rect.topleft,  # pygame
                          "center": self.rect.center,
                          "coordinate": (
-                             round((self.body.position[0] - 1.145) * 5, 2),
-                             round((self.body.position[1] + 1.145) * 5, 2)),
+                             round((self.body.position[0]) * 5, 2),
+                             round((self.body.position[1]) * 5, 2)),
                          "angle": self.body.angle,  # Box2D
                          "r_sensor_value": self.sensor_R,
                          "l_sensor_value": self.sensor_L,
