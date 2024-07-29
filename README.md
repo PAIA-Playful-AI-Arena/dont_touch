@@ -1,68 +1,86 @@
-# Don't Touch README
+# 不要碰碰車
 
 ![Dont_touch](https://img.shields.io/github/v/tag/PAIA-Playful-AI-Arena/Dont_touch)
-[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
-[![MLGame](https://img.shields.io/badge/MLGame->9.5.3.*-<COLOR>.svg)](https://github.com/PAIA-Playful-AI-Arena/MLGame)
-[![pygame](https://img.shields.io/badge/pygame-2.0.1-<COLOR>.svg)](https://github.com/pygame/pygame/releases/tag/2.0.1)
-
-不要碰！
-Don't Touch 是一款基於 MLGame 框架的遊戲，由玩家控制幽浮的速度，達到讓幽浮前進、後退、轉彎的效果，並且幽浮上配備有距離感測器，可以讓玩家了解幽浮與周遭障礙物的距離。玩家需要盡可能減少碰到牆壁的次數，並且走到迷宮的終點。
-![](https://i.imgur.com/G5Moi7g.gif)
+[![Python 3.9](https://img.shields.io/badge/python->3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
+[![MLGame](https://img.shields.io/badge/MLGame->10.4.6a2-<COLOR>.svg)](https://github.com/PAIA-Playful-AI-Arena/MLGame)
 
 
----
-## 目標
+在茫茫的宇宙中，有許多的障礙物，要如何閃過障礙物，走到白洞前往新世界呢？本遊戲提供多元的關卡，隨著遊戲難度提升，考驗各位玩家如何在多變的環境下，依然能夠走到終點。小心，碰到牆壁可是會爆炸的！！
 
-在遊戲時間截止前到達迷宮的終點，並且盡可能減少碰撞牆壁的次數。
 
-### 排名條件
+<img src="./asset/banner.gif" height="500"/>
 
-1. 幽浮所走的距離。經過的檢查點愈多則排名愈前。
-2. 幽浮與牆壁碰撞次數。若兩台走經的檢查點數量相同，則碰撞次數少者排名愈前。
-3. 幽浮前進速度。若前兩項評分依據皆平手，則比較走到最末檢查點時的遊戲時間，愈早走到者排名愈前。
 
-## 遊戲系統
+`遊戲目標`&nbsp;&nbsp;&nbsp; 在遊戲時間截止前到達迷宮的終點，並且盡可能減少碰撞牆壁的次數。
 
-1. 行動機制
+`排名方式`&nbsp;&nbsp;&nbsp; 分數高者獲勝
+    - 分數＝ `檢查點數量`x10000 - `碰撞次數`x10 - `使用時間`x0.001
 
-    控制左右輪轉速，達到前進、後退、轉彎的目的。
-    左輪與右輪的轉速由玩家程式控制，範圍為 -255 ~ 255。 
-   速度為 0 時相當於停在原地，速度為負值實則輪子向後轉，速度為正時輪子向前轉。
+# 更新內容(2.0.1)
+1. 調整資料格式，符合 `MLGame 10.4.6a2` 以後版本
+2. 調整回傳的車子和終點座標，回傳物件 `中心點` 的座標 
 
-2. 感測器
-    感測器測量的起點為自走車車身外圍，終點為直線距離上最靠的牆壁，實際距離如圖所示
-    ![](https://i.imgur.com/AghqU7h.png)
 
-4. 物件大小
+# 啟動方式
 
-    使用Box2D的座標系統，單位為cm，每公分換算為4像素
+- 直接啟動 [main.py](main.py) 即可執行
 
-    - 自走車 10  x 10cm
-    - 終點 15 x 15cm
-4. 座標系統
-    所有座標接回傳物件左上角之座標。
-    原點在迷宮區域的左下角，Ｘ軸向右為正，Y軸向上為正。
-    圖中三個白點分別表示 (0, 0), (5, 0), (0, 5)。
-![](https://i.imgur.com/zq7aAzK.png)
+# 遊戲參數設定
+
+```python
+# main.py 
+game = Dont_touch(user_num=1, map_num=1, time_to_play=450, sound="off", dark_mode='dark', map_file=None)
+```
+* `user_num`：使用者人數，最少1人，最多4人。
+* `map_num`：選擇不同的迷宮，迷宮編號從1開始，預設為1號地圖。
+* `map_file`：可自行匯入地圖
+* `time_to_play`：限制遊戲總時間，單位為 frame，時間到了之後即使有玩家還沒走出迷宮，遊戲仍然會結束。
+* `sound`：音效設定，可選擇"on"或"off"，預設為"off"
+* `dark_mode`: 選擇是否開啟深色模式，可選擇"light"或"dark"，預設為"dark"
+
+
+# 座標系統
+
+- 使用 `Box2D` 的座標系統，長度單位為 `cm` 。
+- `左下角`為原點 (0,0)，`Ｘ軸`向`右`為正，`Y軸`向`上`為正。
+- 使用 Tiled 來繪製地圖，地圖一格為 `5cm`。
+- 所有座標皆回傳物件`中心點`之座標。 
+
+
+## **玩法**
+
+-  移動幽浮：上下左右方向鍵
+
+<br />
+
+## 幽浮
+
+- 大小 10cm x 10cm
+- 控制左右輪轉速，達到前進、後退、轉彎的目的。 左輪與右輪的轉速由玩家程式控制，範圍為 -255 ~ 255。 速度為 0 時相當於停在原地，速度為負值實則輪子向後轉，速度為正時輪子向前轉。
+
+
+## 感測器
+
+- 可透過感測器測量距離`車身`到`牆壁`的距離。
+- 一台車有 6 個感測器。
+
+## 檢查點
+- 為一個線段，通過此線段，檢查點數量加1
+  
+## 終點
+- 大小 15cm x 15cm 
+- 為一個白色蟲洞，象徵逃出迷宮，可以前往新世界。
+
+<br />
+
+
 
 ---
 
 # 進階說明
 
-## 執行方式
-運行於MLGame之下
-* 搭配[MLGame](https://github.com/PAIA-Playful-AI-Arena/MLGame)執行，請將遊戲放在MLGame/games資料夾中，遊戲資料夾需命名為**Dont_touch**
-```
-# 在 `MLGame` 資料夾中
-python -m mlgame -f 60 -i games/dont_touch/ml/ml_play.py -i games/dont_touch/ml/ml_play_manual.py games/dont_touch --time_to_play 1800 --map 2 --sound on
-```
-### 遊戲參數
-* `map`：選擇不同的迷宮，目前提供6種迷宮地圖，迷宮編號從1開始，預設為1號地圖。
-* `time_to_play`：限制遊戲總時間，單位為 frame，時間到了之後即使有玩家還沒走出迷宮，遊戲仍然會結束。
-* `sensor`：選擇感測器數量，目前可以選擇4或6個，預設為6。
-* `sound`：音效設定，可選擇"on"或"off"，預設為"off"
-* `dark_mode`: 選擇是否開啟深色模式，可選擇"light"或"dark"，預設為"dark"
-
+## 特殊功能
+- 可以使用 `H` 按鍵，來開啟/關閉 遊戲補充資訊。
 
 ## ＡＩ範例
 
@@ -116,6 +134,7 @@ class MLPlay:
     "R_sensor": 5.6, 
     "L_sensor": 4.7, 
     "F_sensor": 87.6, 
+    "B_sensor": 17.6, 
     "L_T_sensor": -1, 
     "R_T_sensor": -1, 
     "end_x": 12.5,
@@ -131,16 +150,17 @@ class MLPlay:
     - `GAME_ALIVE`：遊戲進行中
     - `GAME_PASS`：遊戲通關
     - `GAME_OVER`：遊戲結束
-* `x`：玩家自己車子的x座標，該座標系統原點位於迷宮左下角，x軸向右為正。
-* `y`：玩家自己車子的y座標，該座標系統原點位於迷宮左下角，y軸向上為正。
+* `x`：玩家自己車子的x座標，該座標系統原點位於迷宮`左下角`，`x軸`向`右`為正。
+* `y`：玩家自己車子的y座標，該座標系統原點位於迷宮`左下角`，`y軸`向`上`為正。
 * `angle`：玩家自己車子的朝向，車子向上為0度，數值逆時鐘遞增至360
 * `R_sensor`：玩家自己車子右邊超聲波感測器的值，資料型態為數值
 * `L_sensor`：玩家自己車子左邊超聲波感測器的值，資料型態為數值
 * `F_sensor`：玩家自己車子前面超聲波感測器的值，資料型態為數值
 * `L_T_sensor`：玩家自己車子左前超聲波感測器的值，資料型態為數值，單位是公分。
 * `R_T_sensor`：玩家自己車子右前超聲波感測器的值，資料型態為數值
-* `end_x`：終點x座標，該座標系統原點位於迷宮左下角，x軸向右為正。
-* `end_y`：終點y座標，該座標系統原點位於迷宮左下角，y軸向上為正。
+* `B_sensor`：玩家自己車子後面超聲波感測器的值，資料型態為數值
+* `end_x`：終點x座標，該座標系統原點位於迷宮`左下角`，`x軸`向`右`為正。。
+* `end_y`：終點y座標，該座標系統原點位於`左下角`，`y軸`向`上`為正。
 * `crash_count`：玩家此局遊戲中碰撞牆壁的次數，資料型態為數值。
 * `check_points`:遊戲在必經的地方設置數個檢查點，此資料包含所有檢查點的座標，資料型態為列表。
 
@@ -170,9 +190,11 @@ class MLPlay:
 |8|8|2|79978.864|
 
 - `frame_used`：表示遊戲使用了多少個frame
-- `state`：表示遊戲結束的狀態
-    - `FAIL`：遊戲失敗
-    - `FINISH`：遊戲完成
+- `status`：表示遊戲結束的狀態
+  - `fail`:遊戲過程出現問題
+  - `passed`:單人的情況下，成功走到終點，回傳通過
+  - `un_passed`:沒有任何人走到終點，回傳不通過
+  - `finish`:多人的情況下，任一人走到終點，回傳完成
 - `attachment`：紀錄遊戲各個玩家的結果與分數等資訊
     - `player`：玩家編號
     - `rank`：排名

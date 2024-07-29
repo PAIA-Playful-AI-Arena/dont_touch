@@ -32,9 +32,9 @@
     ],
     "CONSTANT": [
         [0, "left boundary", "左邊界"],
-        [800, "right boundary", "右邊界"],
-        [0, "top boundary", "上邊界"],
-        [800, "bottom boundary", "下邊界"]
+        [200, "right boundary", "右邊界"],
+        [200, "top boundary", "上邊界"],
+        [0, "bottom boundary", "下邊界"]
     ],
     "ACTION": [
         ["RESET", "RESET", "重置"]

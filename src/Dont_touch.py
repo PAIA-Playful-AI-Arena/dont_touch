@@ -5,17 +5,22 @@ from mlgame.utils.enum import get_ai_name
 from mlgame.view.decorator import check_game_progress, check_game_result, check_scene_init_data
 from mlgame.view.view_model import create_text_view_data, create_asset_init_data, create_image_view_data, \
     create_line_view_data, Scene, create_polygon_view_data, create_rect_view_data
-
 from .mazeMode import MazeMode
+from .points import End_point
 from .sound_controller import *
+
+HELP_TXT_STYLE = "16px Arial BOLD"
+
+HELP_TXT_COLOR = "#43A047"
 
 '''need some fuction same as arkanoid which without dash in the name of fuction'''
 
 
 class Dont_touch(PaiaGame):
-    def __init__(self, user_num, map, time_to_play, sensor_num, sound, dark_mode = 'dark', *args, **kwargs):
+    def __init__(self, user_num, map_num, time_to_play, sound, dark_mode='dark', map_file=None, *args, **kwargs):
         super().__init__(user_num=user_num)
         # self.game_type = game_type
+        sensor_num = 6
         self.user_num = user_num
         if dark_mode == 'dark':
             self.dark_mode = True
@@ -26,7 +31,10 @@ class Dont_touch(PaiaGame):
         self.is_single = False
         if self.user_num == 1:
             self.is_single = True
-        self.maze_id = map - 1
+        # self.maze_id = map - 1
+        if map_file is None:
+            map_file = path.join(MAP_DIR, f"level_{map_num}.json")
+        self.map_file = map_file
         self.game_end_time = time_to_play
         self.sensor_num = sensor_num
         self.is_sound = sound
@@ -56,7 +64,8 @@ class Dont_touch(PaiaGame):
     def get_data_from_game_to_player(self):
         scene_info = self.get_scene_info
         player_info = {}
-        end_p = self.game_mode.pygame_to_box2d(self.game_mode.end_point.get_info()["coordinate"], self.map_height/PPM)
+        # pygame -> box2D
+        end_p = self.game_mode.pygame_to_box2d(self.game_mode.end_point.get_info()["coordinate"], self.map_height / PPM)
         check_points_coodinate = []
         for cp in self.game_mode.check_points:
             check_points_coodinate.append(self.game_mode.pygame_to_box2d(cp.get_info()["coordinate"], self.map_height/PPM))
@@ -109,7 +118,7 @@ class Dont_touch(PaiaGame):
         """
         game_info = {"scene": self.scene.__dict__,
                      "assets": [],
-                     "background":[]
+                     "background": []
                      }
         game_info["map_width"] = self.game_mode.map.tileWidth * 20
         game_info["map_height"] = self.game_mode.map.tileHeight * 20
@@ -128,7 +137,7 @@ class Dont_touch(PaiaGame):
         game_info["assets"].append(create_asset_init_data("bar_img", 600, 600, bar_path, bar_url))
         for i in range(self.user_num):
             game_info["assets"].append(
-                create_asset_init_data(f"car_0{i + 1}", 40, 40, path.join(ASSET_IMAGE_DIR, f"car_0{i + 1}.png"),
+                create_asset_init_data(f"car_0{i + 1}", 32, 32, path.join(ASSET_IMAGE_DIR, f"car_0{i + 1}.png"),
                                        f"https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/dont_touch/master/asset/image/car_0{i + 1}.png"))
         for i in range(0, 6):
             game_info["assets"].append(create_asset_init_data(f"regularExplosion0{i}", 40, 40,
@@ -136,6 +145,9 @@ class Dont_touch(PaiaGame):
                                                               f"https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/dont_touch/master/asset/image/regularExplosion0{i}.png"))
 
         game_info["background"].append(create_image_view_data("bg_img", 0, 0, 640, 640))
+        game_info["background"].append(create_image_view_data("bar_img", 640, 0, 160, 640))
+
+        # game_info["background"].append(create_image_view_data("target", 0, 0, 640, 640))
 
         for wall in self.game_mode.walls:
             vertices = [(wall.body.transform * v) for v in wall.box.shape.vertices]
@@ -167,24 +179,40 @@ class Dont_touch(PaiaGame):
         game_progress["game_sys_info"] = {"view_center_coordinate": [0, 0]}
         for p in self.game_mode.all_points:
             game_progress["object_list"].append(p.get_progress_data())
+            # if isinstance(p,End_point):
+            #     point_info = p.get_info()
+            x,y =self.game_mode.pygame_to_box2d(p.get_info()["coordinate"], self.map_height / PPM)
+            game_progress["toggle_with_bias"].append(
+                create_rect_view_data("car_coordinate_rect",
+                                       p.rect.centerx-40,p.rect.centery, 90, 20, BLACK))
 
-        game_progress["toggle"].append(create_image_view_data("bar_img", 640, 0, 160, 640))
+            game_progress["toggle_with_bias"].append(
+                create_text_view_data(
+                    f"({x:.2f},{y:.2f})",
+                    p.rect.centerx-40,p.rect.centery,
+                    HELP_TXT_COLOR,
+                    HELP_TXT_STYLE
+                )
+            )
+
+        # game_progress["background"].append(create_image_view_data("bar_img", 640, 0, 160, 640))
         # wall
 
         # text
-        game_progress["toggle"].append(
+        game_progress["background"].append(
             create_text_view_data("{0:05d} frames".format(self.frame_count), 658, 30, WHITE, font_style="21px Arial"))
         for car in self.game_mode.car_info:
-            game_progress["toggle"].append(
+            game_progress["background"].append(
                 create_text_view_data(f"{car['crash_times']}", WIDTH - 108, 104 + 140 * car["id"], WHITE,
                                       font_style="20px Arial"))
 
-            game_progress["toggle"].append(
+            game_progress["background"].append(
                 create_text_view_data(f"{car['check_point']}", WIDTH - 108, 142 + 140 * car["id"], WHITE,
                                       font_style="20px Arial"))
 
-            game_progress["toggle"].append(
-                create_text_view_data("{0:04d} frames".format(car["end_frame"]), WIDTH - 114, 179 + 140 * car["id"], WHITE,
+            game_progress["background"].append(
+                create_text_view_data("{0:04d} frames".format(car["end_frame"]), WIDTH - 114, 179 + 140 * car["id"],
+                                      WHITE,
                                       font_style="20px Arial"))
 
             if car["is_running"]:
@@ -291,7 +319,19 @@ class Dont_touch(PaiaGame):
                                                                                car["center"][0] - 20, -60 * math.cos(
                         -car["angle"] - math.pi / 2) + car["center"][1] - 10, SENSOR_R, font_style="20px Arial"))
 
-            # else:
+                # 車子座標
+                game_progress["toggle_with_bias"].append(
+                    create_rect_view_data("car_coordinate_rect",
+                    car["topleft"][0]-20,car["center"][1]+5, 90, 20, BLACK))
+
+                game_progress["toggle_with_bias"].append(
+                    create_text_view_data(
+                        f"({car['coordinate'][0]:.1f},{car['coordinate'][1]:.1f})",
+                        car["topleft"][0]-20, car["center"][1]+5,
+                        HELP_TXT_COLOR,
+                        HELP_TXT_STYLE
+                    )
+                )  # else:
             #     game_progress["toggle"].append(create_text_view_data("{0:05d} frames".format(car["end_frame"]),
             #                                                          WIDTH - 160, 140 + 175 * car["id"],
             #                                                          WHITE,
@@ -336,9 +376,9 @@ class Dont_touch(PaiaGame):
                          }
             rank.append(same_rank)
         print({"frame_used": scene_info["frame"],
-                "status": self.game_mode.state,
-                "attachment": rank,
-                })
+               "status": self.game_mode.state,
+               "attachment": rank,
+               })
         return {"frame_used": scene_info["frame"],
                 "status": self.game_mode.state,
                 "attachment": rank,
@@ -354,17 +394,13 @@ class Dont_touch(PaiaGame):
             return {"1P": "RESET",
                     "2P": "RESET",
                     "3P": "RESET",
-                    "4P": "RESET",
-                    "5P": "RESET",
-                    "6P": "RESET",
+                    "4P": "RESET"
                     }
         key_pressed_list = pygame.key.get_pressed()
         cmd_1P = {"left_PWM": 0, "right_PWM": 0}
         cmd_2P = {"left_PWM": 0, "right_PWM": 0}
         cmd_3P = {"left_PWM": 0, "right_PWM": 0}
         cmd_4P = {"left_PWM": 0, "right_PWM": 0}
-        cmd_5P = {"left_PWM": 0, "right_PWM": 0}
-        cmd_6P = {"left_PWM": 0, "right_PWM": 0}
 
         if key_pressed_list[pygame.K_UP]:
             cmd_1P["left_PWM"] = 100
@@ -391,11 +427,10 @@ class Dont_touch(PaiaGame):
         return {"1P": cmd_1P,
                 "2P": cmd_2P,
                 "3P": cmd_3P,
-                "4P": cmd_4P,
-                "5P": cmd_5P,
-                "6P": cmd_6P}
+                "4P": cmd_4P}
 
     def set_game_mode(self):
-        self.game_mode = MazeMode(self.user_num, self.maze_id + 1, self.game_end_time, self.sensor_num,
+
+        self.game_mode = MazeMode(self.user_num, self.map_file, self.game_end_time, self.sensor_num,
                                   self.is_sound)
-        self.game_type = "MAZE"
+        # self.game_type = "MAZE"

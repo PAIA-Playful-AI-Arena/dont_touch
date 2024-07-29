@@ -131,9 +131,10 @@ class TiledMap_box2d:
                 continue
             elif self.data[i][2] in range(2, 6):
                 # obj["car"] = self.data[i]
+                # from tiled -> box2D
                 obj["car"] = [self.tileHeight - 1 - self.data[i][0], self.data[i][1], self.data[i][2]]
             elif self.data[i][2] == 6:
-                obj["end_point"] = [self.tileHeight - 1 - self.data[i][0], self.data[i][1], self.data[i][2]]
+                obj["end_point"] = [self.tileHeight - self.data[i][0], self.data[i][1], self.data[i][2]]
                 # obj["end_point"] = self.data[i]
             elif self.data[i][2] == 7:
                 obj["check_point"].append([self.tileHeight - 1 - self.data[i][0], self.data[i][1], self.data[i][2]])

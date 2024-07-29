@@ -203,6 +203,7 @@ class GameMode(object):
 
     def load_map_object(self, obj):
         o = obj["end_point"]
+        # tiled -> box2d 需要對調 x y
         x, y = self.transfer_box2d_to_pygame((o[1], o[0]))
         self.end_point = End_point(self, (x, y))
         self.check_point_num += 1
@@ -210,6 +211,7 @@ class GameMode(object):
         # print(o)
             # self.check_point_num += 1
         o = obj["car"]
+        #
         if o[2] == 3:
             for world in self.worlds:
                 car = Car(world, (o[1], o[0]), self.worlds.index(world), self.sensor_num, 2)
