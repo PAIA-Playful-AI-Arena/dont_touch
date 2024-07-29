@@ -38,7 +38,10 @@ class End_point(Point):
                 hit.end_frame = self.game.frame
                 hit.is_completed = True
                 self.game.eliminated_user.append(hit)  # TODO #外部注入
-                self.game.state = GameResultState.FINISH
+                if self.game.user_num==1:
+                    self.game.state = GameResultState.PASSED
+                elif self.game.user_num>1:
+                    self.game.state = GameResultState.FINISH
                 hit.is_running = False
                 hit.status = GameStatus.GAME_PASS
     def get_info(self):

@@ -16,20 +16,26 @@
 
 # 更新內容(2.0.1)
 1. 調整資料格式，符合 `MLGame 10.4.6a2` 以後版本
+2. 調整回傳的車子和終點座標，回傳物件 `中心點` 的座標 
 
 
-# AI 的行動
-需同時給予左右兩個輪子移動的力量，力量介於 `-255` 到 `255` 之間，透過控制左右輪轉速，即可達成前進、左轉、右轉、後退等動作。
+# 啟動方式
 
-<br />
+- 直接啟動 [main.py](main.py) 即可執行
 
-![top](/assets/icons/top.svg)&nbsp;&nbsp;&nbsp;![w-key](/assets/icons/w.svg)&nbsp;&nbsp;&nbsp;左右輪輸出 -255 ~ 255，由玩家程式控制。
+# 遊戲參數設定
 
-![bottom](/assets/icons/bottom.svg)&nbsp;&nbsp;&nbsp;![s-key](/assets/icons/s.svg)&nbsp;&nbsp;&nbsp;??
+```python
+# main.py 
+game = Dont_touch(user_num=1, map_num=1, time_to_play=450, sound="off", dark_mode='dark', map_file=None)
+```
+* `user_num`：使用者人數，最少1人，最多4人。
+* `map_num`：選擇不同的迷宮，迷宮編號從1開始，預設為1號地圖。
+* `map_file`：可自行匯入地圖
+* `time_to_play`：限制遊戲總時間，單位為 frame，時間到了之後即使有玩家還沒走出迷宮，遊戲仍然會結束。
+* `sound`：音效設定，可選擇"on"或"off"，預設為"off"
+* `dark_mode`: 選擇是否開啟深色模式，可選擇"light"或"dark"，預設為"dark"
 
-![left-key](/assets/icons/left.svg)&nbsp;&nbsp;&nbsp;![A-key](/assets/icons/a.svg)&nbsp;&nbsp;&nbsp;??
-
-![right-key](/assets/icons/right.svg)&nbsp;&nbsp;&nbsp;![D-key](/assets/icons/d.svg)&nbsp;&nbsp;&nbsp;??
 
 # 座標系統
 
@@ -37,9 +43,11 @@
 - `左下角`為原點 (0,0)，`Ｘ軸`向`右`為正，`Y軸`向`上`為正。
 - 使用 Tiled 來繪製地圖，地圖一格為 `5cm`。
 - 所有座標皆回傳物件`中心點`之座標。 
-- 圖中三個白點分別表示 (0, 0), (5, 0), (0, 5)。
-![](https://i.imgur.com/zq7aAzK.png)
 
+
+## **玩法**
+
+-  移動幽浮：上下左右方向鍵
 
 <br />
 
@@ -69,20 +77,8 @@
 
 # 進階說明
 
-## 執行方式
-運行於MLGame之下
-* 搭配[MLGame](https://github.com/PAIA-Playful-AI-Arena/MLGame)執行，請將遊戲放在MLGame/games資料夾中，遊戲資料夾需命名為**Dont_touch**
-```
-# 在 `MLGame` 資料夾中
-python -m mlgame -f 60 -i games/dont_touch/ml/ml_play.py -i games/dont_touch/ml/ml_play_manual.py games/dont_touch --time_to_play 1800 --map 2 --sound on
-```
-### 遊戲參數
-* `map`：選擇不同的迷宮，目前提供6種迷宮地圖，迷宮編號從1開始，預設為1號地圖。
-* `time_to_play`：限制遊戲總時間，單位為 frame，時間到了之後即使有玩家還沒走出迷宮，遊戲仍然會結束。
-* `sensor`：選擇感測器數量，目前可以選擇4或6個，預設為6。
-* `sound`：音效設定，可選擇"on"或"off"，預設為"off"
-* `dark_mode`: 選擇是否開啟深色模式，可選擇"light"或"dark"，預設為"dark"
-
+## 特殊功能
+- 可以使用 `H` 按鍵，來開啟/關閉 遊戲補充資訊。
 
 ## ＡＩ範例
 
@@ -136,6 +132,7 @@ class MLPlay:
     "R_sensor": 5.6, 
     "L_sensor": 4.7, 
     "F_sensor": 87.6, 
+    "B_sensor": 17.6, 
     "L_T_sensor": -1, 
     "R_T_sensor": -1, 
     "end_x": 12.5,
@@ -151,16 +148,17 @@ class MLPlay:
     - `GAME_ALIVE`：遊戲進行中
     - `GAME_PASS`：遊戲通關
     - `GAME_OVER`：遊戲結束
-* `x`：玩家自己車子的x座標，該座標系統原點位於迷宮左下角，x軸向右為正。
-* `y`：玩家自己車子的y座標，該座標系統原點位於迷宮左下角，y軸向上為正。
+* `x`：玩家自己車子的x座標，該座標系統原點位於迷宮`左下角`，`x軸`向`右`為正。
+* `y`：玩家自己車子的y座標，該座標系統原點位於迷宮`左下角`，`y軸`向`上`為正。
 * `angle`：玩家自己車子的朝向，車子向上為0度，數值逆時鐘遞增至360
 * `R_sensor`：玩家自己車子右邊超聲波感測器的值，資料型態為數值
 * `L_sensor`：玩家自己車子左邊超聲波感測器的值，資料型態為數值
 * `F_sensor`：玩家自己車子前面超聲波感測器的值，資料型態為數值
 * `L_T_sensor`：玩家自己車子左前超聲波感測器的值，資料型態為數值，單位是公分。
 * `R_T_sensor`：玩家自己車子右前超聲波感測器的值，資料型態為數值
-* `end_x`：終點x座標，該座標系統原點位於迷宮左下角，x軸向右為正。
-* `end_y`：終點y座標，該座標系統原點位於迷宮左下角，y軸向上為正。
+* `B_sensor`：玩家自己車子後面超聲波感測器的值，資料型態為數值
+* `end_x`：終點x座標，該座標系統原點位於迷宮`左下角`，`x軸`向`右`為正。。
+* `end_y`：終點y座標，該座標系統原點位於`左下角`，`y軸`向`上`為正。
 * `crash_count`：玩家此局遊戲中碰撞牆壁的次數，資料型態為數值。
 * `check_points`:遊戲在必經的地方設置數個檢查點，此資料包含所有檢查點的座標，資料型態為列表。
 
@@ -190,9 +188,11 @@ class MLPlay:
 |8|8|2|79978.864|
 
 - `frame_used`：表示遊戲使用了多少個frame
-- `state`：表示遊戲結束的狀態
-    - `FAIL`：遊戲失敗
-    - `FINISH`：遊戲完成
+- `status`：表示遊戲結束的狀態
+  - `fail`:遊戲過程出現問題
+  - `passed`:單人的情況下，成功走到終點，回傳通過
+  - `un_passed`:沒有任何人走到終點，回傳不通過
+  - `finish`:多人的情況下，任一人走到終點，回傳完成
 - `attachment`：紀錄遊戲各個玩家的結果與分數等資訊
     - `player`：玩家編號
     - `rank`：排名
