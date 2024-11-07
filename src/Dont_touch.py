@@ -33,7 +33,7 @@ class Dont_touch(PaiaGame):
             self.is_single = True
         # self.maze_id = map - 1
         if map_file is None:
-            map_file = path.join(MAP_DIR, f"level_{map_num}.json")
+            map_file = path.join(MAP_DIR, f"level_{map_num}.tmj")
         self.map_file = map_file
         self.game_end_time = time_to_play
         self.sensor_num = sensor_num
