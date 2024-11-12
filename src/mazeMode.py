@@ -4,17 +4,17 @@ import pygame
 # from .car import Car
 from mlgame.game.paia_game import GameResultState
 from mlgame.utils.enum import get_ai_name
+from mlgame.view.audio_model import SoundProgressSchema
 from .env import *
 from .gameMode import GameMode
 from .maze_wall import Wall
 from .points import End_point, Check_point, Outside_point
-from .sound_controller import SoundController
 from .tilemap import Map
 from .tiledMap_to_box2d import TiledMap_box2d
 
 
 class MazeMode(GameMode):
-    def __init__(self, user_num: int, map_file, time, sensor, sound_controller):
+    def __init__(self, user_num: int, map_file, time, sensor):
         super(MazeMode, self).__init__()
         '''load map data'''
         self.user_num = user_num
@@ -36,6 +36,7 @@ class MazeMode(GameMode):
         self.ranked_user = []  # pygame.sprite car
         self.result = []
         self.eliminated_user = []
+        self.sound=[]
 
         self.game_end_time = time  # int, decide how many frames the game will end even some users don't finish game
         pygame.font.init()
@@ -45,8 +46,6 @@ class MazeMode(GameMode):
         self.x = 0
         self._init_world(user_num)
         self.new()
-        '''sound'''
-        self.sound_controller = SoundController(sound_controller)
         # self.world.contactListener.fixtureA = self.car
         # print(self.world.contactListener.m_contactList)
 
@@ -86,6 +85,7 @@ class MazeMode(GameMode):
     def update_sprite(self, command):
         '''update the model of game,call this fuction per frame'''
         self.car_info.clear()
+        self.sound.clear()
         self.frame += 1
         self.handle_event()
         self._is_game_end()
@@ -105,7 +105,12 @@ class MazeMode(GameMode):
                         contact += 1
                 if contact > 2:
                     if car.collide(self.frame):
-                        self.sound_controller.play_bomb_sound()
+                        self.sound.append(
+                            SoundProgressSchema(sound_id='bomb').__dict__
+                        )
+
+                        pass
+                        # self.sound_controller.play_bomb_sound()
         for world in self.worlds:
             world.Step(TIME_STEP, 10, 10)
             world.ClearForces()

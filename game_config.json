@@ -1,6 +1,6 @@
 {
   "game_name": "dont_touch",
-  "version": "2.0.1",
+  "version": "2.1.0b1",
   "url": "https://github.com/PAIA-Playful-AI-Arena/dont_touch",
   "description": "不要碰！",
   "logo": [
@@ -35,17 +35,6 @@
       "step": 30,
       "help": "set the limit of frame count , actually time will be revised according to your FPS .",
       "default": 450
-    },
-    {
-      "name": "sound",
-      "verbose": "遊戲音效",
-      "type": "str",
-      "choices": [
-        "on",
-        "off"
-      ],
-      "help": "'on' can turn on the sound.",
-      "default": "on"
     },
     {
       "name": "dark_mode",
