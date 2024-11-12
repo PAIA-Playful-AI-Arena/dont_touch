@@ -132,12 +132,11 @@ class Dont_touch(PaiaGame):
         for i in range(self.user_num):
             game_info["assets"].append(
                 create_asset_init_data(f"car_0{i + 1}", 32, 32, path.join(ASSET_IMAGE_DIR, f"car_0{i + 1}.png"),
-                                       f"https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/dont_touch/master/asset/image/car_0{i + 1}.png"))
+                                       f"https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/dont_touch/{version}/asset/image/car_0{i + 1}.png"))
         for i in range(0, 6):
-            # TODO version
             game_info["assets"].append(create_asset_init_data(f"regularExplosion0{i}", 40, 40,
                                                               path.join(ASSET_IMAGE_DIR, f"regularExplosion0{i}.png"),
-                                                              f"https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/dont_touch/master/asset/image/regularExplosion0{i}.png"))
+                                                              f"https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/dont_touch/{version}/asset/image/regularExplosion0{i}.png"))
 
         game_info["background"].append(create_image_view_data("bg_img", 0, 0, 640, 640))
         game_info["background"].append(create_image_view_data("bar_img", 640, 0, 160, 640))
