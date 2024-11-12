@@ -37,17 +37,6 @@
       "default": 450
     },
     {
-      "name": "sound",
-      "verbose": "遊戲音效",
-      "type": "str",
-      "choices": [
-        "on",
-        "off"
-      ],
-      "help": "'on' can turn on the sound.",
-      "default": "on"
-    },
-    {
       "name": "dark_mode",
       "verbose": "深色模式",
       "type": "str",
