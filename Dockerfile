@@ -1,4 +1,4 @@
-FROM paiatech/mlgame:10.4.6a2-slim
+FROM paiatech/paia-game-env:20250312
 ADD . /game
 WORKDIR /game
 RUN apt update -y && apt install -y swig && rm -rf /var/lib/apt/lists/*
