@@ -16,9 +16,9 @@ class GameMode(object):
         self.clock = pygame.time.Clock()
         self.running = True
         self.frame = 0
-        pygame.font.init()
-        self.font = pygame.font.Font(pygame.font.match_font("arial", bold=True), 15)
-        self.time_font = pygame.font.Font(pygame.font.match_font("arial", bold=True), 46)
+        # pygame.font.init()
+        # self.font = pygame.font.Font(pygame.font.match_font("arial", bold=True), 15)
+        # self.time_font = pygame.font.Font(pygame.font.match_font("arial", bold=True), 46)
         self.check_point_num = 0
         self.check_points = []
         # self.start_time = time.time()
