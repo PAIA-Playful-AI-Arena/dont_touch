@@ -14,8 +14,8 @@ from .tiledMap_to_box2d import TiledMap_box2d
 
 
 class MazeMode(GameMode):
-    def __init__(self, user_num: int, map_file, time, sensor):
-        super(MazeMode, self).__init__()
+    def __init__(self, user_num: int, map_file, time, sensor, group_ai_list):
+        super(MazeMode, self).__init__(group_ai_list=group_ai_list)
         '''load map data'''
         self.user_num = user_num
         # self.maze_id = maze_no - 1

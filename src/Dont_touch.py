@@ -14,7 +14,7 @@ from .mazeMode import MazeMode
 
 
 class Dont_touch(PaiaGame):
-    def __init__(self, user_num, map_num, time_to_play, dark_mode='dark', map_file=None, *args, **kwargs):
+    def __init__(self, user_num, map_num, time_to_play, dark_mode='dark', map_file=None,group_ai_list=None, *args, **kwargs):
         super().__init__(user_num=user_num)
         # self.game_type = game_type
         sensor_num = 6
@@ -34,12 +34,14 @@ class Dont_touch(PaiaGame):
         self.map_file = map_file
         self.game_end_time = time_to_play
         self.sensor_num = sensor_num
+        self.group_ai_list = group_ai_list
         self.set_game_mode()
         self.is_running = self.isRunning()
         self.map_width = self.game_mode.map.width
         self.map_height = self.game_mode.map.height
         self.scene = Scene(WIDTH, HEIGHT, "#08142b", 0, 0)
         self.origin_car_pos = [0, 0]
+        
 
     # self.origin_car_pos = self.game_mode.car_info[0]["center"]
 
@@ -207,23 +209,27 @@ class Dont_touch(PaiaGame):
         # wall
 
         # text
-        foreground.append(
+        object_list.append(
             create_text_view_data("{0:05d} frames".format(self.frame_count), 658, 30, WHITE, font_style="21px Arial"))
         for car in self.game_mode.car_info:
-            foreground.append(
+            object_list.append(
                 create_text_view_data(
                     f"{car['crash_times']}", WIDTH - 108, 104 + 140 * car["id"], WHITE, font_style="20px Arial")
             )
 
-            foreground.append(
+            object_list.append(
                 create_text_view_data(
                     f"{car['check_point']}", WIDTH - 108, 142 + 140 * car["id"], WHITE,
                     font_style="20px Arial"))
 
-            foreground.append(
+            object_list.append(
                 create_text_view_data(
                     "{0:04d} frames".format(car["end_frame"]), WIDTH - 114, 179 + 140 * car["id"], WHITE,
                     font_style="20px Arial"))
+            object_list.append(
+                create_text_view_data(
+                    f"{car['ai_name']}", WIDTH - 80, 80 + 140 * car["id"], WHITE,
+                    font_style="20px Arial Bold"))
 
             if car["is_running"]:
                 # line
@@ -444,5 +450,5 @@ class Dont_touch(PaiaGame):
 
     def set_game_mode(self):
 
-        self.game_mode = MazeMode(self.user_num, self.map_file, self.game_end_time, self.sensor_num)
+        self.game_mode = MazeMode(self.user_num, self.map_file, self.game_end_time, self.sensor_num, self.group_ai_list)
         # self.game_type = "MAZE"
