@@ -167,6 +167,7 @@ class Dont_touch(PaiaGame):
         Get the position of game objects for drawing on the web
         """
         background = []
+        foreground=[]
         object_list = []
         toggle_with_bias = []
         toggle = []
@@ -206,20 +207,20 @@ class Dont_touch(PaiaGame):
         # wall
 
         # text
-        background.append(
+        foreground.append(
             create_text_view_data("{0:05d} frames".format(self.frame_count), 658, 30, WHITE, font_style="21px Arial"))
         for car in self.game_mode.car_info:
-            background.append(
+            foreground.append(
                 create_text_view_data(
                     f"{car['crash_times']}", WIDTH - 108, 104 + 140 * car["id"], WHITE, font_style="20px Arial")
             )
 
-            background.append(
+            foreground.append(
                 create_text_view_data(
                     f"{car['check_point']}", WIDTH - 108, 142 + 140 * car["id"], WHITE,
                     font_style="20px Arial"))
 
-            background.append(
+            foreground.append(
                 create_text_view_data(
                     "{0:04d} frames".format(car["end_frame"]), WIDTH - 114, 179 + 140 * car["id"], WHITE,
                     font_style="20px Arial"))
@@ -350,12 +351,12 @@ class Dont_touch(PaiaGame):
         game_progress = create_scene_progress_data(
             frame=self.frame_count,
             background=background,
+            foreground=foreground,
             object_list=object_list,
-            foreground=[],
             toggle=toggle,
             toggle_with_bias=toggle_with_bias,
             musics=[MusicProgressSchema(music_id=f"bgm").__dict__],
-            sounds=sound, game_sys_info=game_sys_info
+            sounds=sound, game_sys_info=game_sys_info,
         )
         return game_progress
 
