@@ -8,9 +8,10 @@ from .env import *
 
 
 class Car(pygame.sprite.Sprite):
-    def __init__(self, world, coordinate: tuple, car_no: int, sensor_num, angle: int):
+    def __init__(self, world, coordinate: tuple, car_no: int, sensor_num, angle: int, ai_name: str):
         pygame.sprite.Sprite.__init__(self)
         self.car_no = car_no  # From 0 to 3
+        self.ai_name = ai_name
         self.image_num = 9
         self.image_name = f"car_0{self.car_no + 1}"
         self.collide_frame = -100
@@ -123,5 +124,6 @@ class Car(pygame.sprite.Sprite):
                          "image": self.image_name,
                          "crash_times": self.collide_times,
                          "check_point": self.check_point,
+                         "ai_name": self.ai_name,
                          }
         return self.car_info

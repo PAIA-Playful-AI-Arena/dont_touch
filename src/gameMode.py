@@ -11,9 +11,10 @@ from .env import *
 
 
 class GameMode(object):
-    def __init__(self, bg_img=pygame.Surface((WIDTH, HEIGHT))):
+    def __init__(self, bg_img=pygame.Surface((WIDTH, HEIGHT)), group_ai_list=None):
         self.bg_img = bg_img
         self.clock = pygame.time.Clock()
+        self.group_ai_list = group_ai_list
         self.running = True
         self.frame = 0
         # pygame.font.init()
@@ -214,22 +215,22 @@ class GameMode(object):
         #
         if o[2] == 3:
             for world in self.worlds:
-                car = Car(world, (o[1], o[0]), self.worlds.index(world), self.sensor_num, 2)
+                car = Car(world, (o[1], o[0]), self.worlds.index(world), self.sensor_num, 2,ai_name=self.group_ai_list[self.worlds.index(world)].ai_label)
                 self.cars.add(car)
                 self.car_info.append(car.get_info())
         elif o[2] == 4:
             for world in self.worlds:
-                car = Car(world, (o[1], o[0]), self.worlds.index(world), self.sensor_num, 0.5)
+                car = Car(world, (o[1], o[0]), self.worlds.index(world), self.sensor_num, 0.5,ai_name=self.group_ai_list[self.worlds.index(world)].ai_label)
                 self.cars.add(car)
                 self.car_info.append(car.get_info())
         elif o[2] == 2:
             for world in self.worlds:
-                car = Car(world, (o[1], o[0]), self.worlds.index(world), self.sensor_num, 1)
+                car = Car(world, (o[1], o[0]), self.worlds.index(world), self.sensor_num, 1,ai_name=self.group_ai_list[self.worlds.index(world)].ai_label)
                 self.cars.add(car)
                 self.car_info.append(car.get_info())
         elif o[2] == 5:
             for world in self.worlds:
-                car = Car(world, (o[1], o[0]), self.worlds.index(world), self.sensor_num, 1.5)
+                car = Car(world, (o[1], o[0]), self.worlds.index(world), self.sensor_num, 1.5,ai_name=self.group_ai_list[self.worlds.index(world)].ai_label)
                 self.cars.add(car)
                 self.car_info.append(car.get_info())
         try:
